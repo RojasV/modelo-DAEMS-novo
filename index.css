@@ -1,9 +1,8 @@
-body{
+body {
     background-color: #efefef;
 }
 
 .footer {
-    position: fixed;
     bottom: 0;
 }
 
@@ -16,7 +15,6 @@ body{
 .pix-payment {
     border-left: 1px solid rgba(0, 0, 0, .125);
     border-bottom: 1px solid rgba(0, 0, 0, .125);
-
 }
 
 .client-data {
@@ -26,7 +24,6 @@ body{
 .bar-content {
     border-bottom: 1px solid rgba(0, 0, 0, .125);
 }
-
 
 .client-data-infos>span {
     margin-bottom: 16px;
@@ -39,19 +36,21 @@ body{
     font-size: 18px;
 }
 
-.main-infos>span{
+.main-infos>span {
     font-weight: 600;
     font-size: 18px;
 }
 
-.bar-code{
-     font-weight: 600;
+.bar-code {
+    font-weight: 600;
     font-size: 18px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-
 
 .btn {
     display: inline-block;
@@ -93,8 +92,6 @@ body{
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;
-
-
 }
 
 .btn:hover,
@@ -153,3 +150,54 @@ body{
     -moz-box-shadow: none;
     box-shadow: none;
 }
+
+/* BREAKPOINTS */
+
+/* // X-Small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap */
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+    .main-content {
+        margin: 1rem !important;
+    }
+
+    .client-data-infos>span {
+        margin-bottom: 16px;
+        font-weight: 600;
+        font-size: 1.2rem;
+    }
+
+    .main-infos {
+        margin: 1rem;
+    }
+
+    .main-infos>span {
+        font-weight: 600;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .bar-content {
+        padding: 1rem;
+    }
+
+    .copy-button {
+        margin-top: 1rem;
+    }
+    .print{
+        margin-top: 1rem;
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) {}
+
+/* // Large devices (desktops, 992px and up) */
+@media (max-width: 992px) {}
+
+/* // X-Large devices (large desktops, 1200px and up) */
+@media (max-width: 1200px) {}
+
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (max-width: 1400px) {}
