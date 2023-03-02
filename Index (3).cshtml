@@ -1,0 +1,125 @@
+﻿@using System.Collections
+@model DAEMS.ModelData.Logic.DBDAEMS.Model.DaemsConsulta
+@{
+    ViewBag.Title = "Pagamento de DAEMS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/Views/PagamentoDAEMS/Index.js")?TXT=@DateTime.Now.Ticks.ToString()" type="text/javascript"></script>
+<link href="~/Content/Content/css/boxField.css" rel="stylesheet" />
+<style>
+    body {
+        background-color: #ffffff !important;
+    }
+</style>
+
+@using (Html.BeginForm("Pagar", "PagarDAEMS", null, FormMethod.Post, new { name = "form", id = "form", @class = "form-horizontal" }))
+{
+    @Html.Hidden("strCopiarColarPIX")
+    @Html.Hidden("strCodigoBarras")
+
+    <div class="container main-container" style="display: flex; align-items: center; justify-content: center; flex-direction:column; border: 1px solid rgba(0, 0, 0, .125);">
+        <div class="card shadow-sm main-content w-100 m-5 ">
+            <div class="content-holder" style="display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; justify-content: space-around;">
+                <div class="client-data col-sm-12"
+                     style="width: 70%; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="title" style="width: 25%; padding: 1rem;">
+                        Dados do contribuinte
+                    </div>
+                    <div id="dados-historico-daems" class="client-data-infos"
+                         style="display: flex; flex-direction: column; margin: 3rem; margin-top: 1.5rem; margin-bottom: 0;">
+                        <span>
+                            DAEMS:
+                            <span> @Html.TextBox("CodigoTarja", "", new { @readonly = "readonly" })</span>
+                        </span>
+                        <span>
+                            Tributo:
+                            <span> @Html.TextBox("Tributo", "", new { @readonly = "readonly" })</span>
+                        </span>
+                        <span>
+                            Vencimento:
+                            <span> @Html.TextBox("DataVencimento", "", new { @readonly = "readonly" })</span>
+                        </span>
+                        <span>
+                            Valor total:
+                            <span> @Html.TextBox("ValorTotal", "", new { @readonly = "readonly" })</span>
+                        </span>
+                        <span>
+                            Nome do contribuinte:
+                            <span> @Html.TextBox("RazaoSocial", "", new { @readonly = "readonly" })</span>
+                        </span>
+                    </div>
+                    <hr>
+                    <div class="infos main-infos"
+                         style="display: flex; justify-content: center; align-items: center;">
+                        <span>
+                            Valide seu DAEMS em: <a href="https://bit.ly/2Ua2C3Q">https://bit.ly/2Ua2C3Q,</a>
+                            ATENÇÃO! NÃO RECEBER APÓS: 31/01/2023
+
+                        </span>
+                    </div>
+                </div>
+                <div class="pix-payment col-sm-12" style="width: 25%; padding: 1rem;">
+                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 0.25rem;">
+                        <div style="text-align: center;">
+                            <h3 class="">Pague com </h3>
+                        </div>
+                        <div class=""
+                             style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                            <img class="" src="./assets/logo-pix-icone-256.png" alt="" style="width: 25%;">
+                            <h3 class="" style="margin-bottom: 0;">PIX</h3>
+                        </div>
+                        <div class="" style="display: flex; align-items: center; justify-content: center;">
+                            <div id="dvQrCode">
+                                <img id="imgQrCode" class="rounded mx-auto d-block"
+                                     style="height:200px;width:200px;" />
+                            </div>
+                        </div>
+                        <div class="" style="text-align: center;">
+                            <span>
+                                Aponte sua câmera para o QR code ou clique no botão abaixo para utilizar o
+                                modo
+                                copia e cola:
+                            </span>
+                        </div>
+                        <div class="infos print d-flex align-items-center justify-content-center mt-3"
+                             style="display: flex; align-items: center; justify-content: center; margin-top: 1rem;">
+                            <div id="CopiarPix" onclick="CopiarPix()" class="btn btn-large btn-block">
+                                <span class="icon-qrcode"></span> PIX copia e cola
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bar-content content-holder" style="display: flex; flex-direction: row; align-items: center;">
+                <div class=""
+                     style="display: flex; flex-direction: row; margin: 0.5rem; flex-wrap: wrap; justify-content: center; width: 67%;">
+                    <div>
+                        <img id="imgBarCode" style="height:80px;width:100%" />
+                    </div>
+                    <div id="strBarCode" style="width: 100%; margin: 0 auto; text-align:center "></div>
+                </div>
+                <div id="CopiarBarras" onclick="CopiarBarras()" class="btn btn-large btn-block"
+                     style="width: 200px; margin: 0 auto; height: 10%;">
+                    <span class="icon-barcode"></span> Copiar Código de Barras
+                </div>
+            </div>
+        </div>
+        <div class="content-holder col-sm-12"
+             style="display: flex; flex-direction: row; justify-content: center; flex-wrap: wrap; margin: 0.5rem; width: 100%;">
+            <div class="bar-code col-sm-3" style="width: 67%; text-align: center;">
+                Emissão pelo site:&ensp; <a href="https://www.sefaz.ms.gov.br"> www.sefaz.ms.gov.br</a> Não
+                use
+                cópias, emita um DAEMS por pagamento.
+            </div>
+            <div class="infos print"
+                 style="display: flex; width: 25%; align-items: center; justify-content: center;">
+                <div id="ImprimirDAEMS" onclick="ImprimirDAEMS()" class="btn btn-large btn-block">
+                    <span class="icon-print"></span> Imprimir DAEMS
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="DivMensagemErro" margin: 0 auto; float: none;">
+    </div>
+}

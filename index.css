@@ -25,6 +25,8 @@ body {
     border-bottom: 1px solid rgba(0, 0, 0, .125);
 }
 
+
+
 .client-data-infos>span>span {
     margin-bottom: 16px;
     font-weight: 600;
@@ -168,6 +170,15 @@ body {
 
 /* // Small devices (landscape phones, 576px and up) */
 @media (max-width: 576px) {
+
+    .content-holder {
+        flex-direction: column !important
+    }
+
+    .client-data-responsive {
+        width: 100% !important;
+    }
+
     .main-content {
         margin: 1rem !important;
     }
@@ -192,6 +203,18 @@ body {
         text-align: center;
     }
 
+    .pix-payment {
+        width: 100% !important;
+    }
+
+    .bar-code {
+        width: 100% !important;
+    }
+
+    .title {
+        width: 100% !important;
+    }
+
     .bar-content {
         padding: 1rem;
     }
@@ -202,6 +225,7 @@ body {
 
     .print {
         margin-top: 1rem;
+        width: 100% !important;
     }
 }
 
